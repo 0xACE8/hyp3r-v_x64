@@ -8,7 +8,7 @@
 sed -i 's/192.168.1.1/192.168.177.77/g' package/base-files/files/bin/config_generate
 
 # Set password to PASSWORD
-#sed -i 's/root:::0:99999:7:::/root:$1$4xKZB45Q$w0CPT5M6vBWbYNmSWuxfU.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
+sed -i 's/root:::0:99999:7:::/root:$1$4xKZB45Q$w0CPT5M6vBWbYNmSWuxfU.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
 # Change language=auto to zh_cn
 sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-default-settings
@@ -39,7 +39,7 @@ sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.
 sed -i 's/"终端"/"TTYD 终端"/g' feeds/luci/applications/luci-app-ttyd/po/zh_Hans/ttyd.po
 
 # dnscrypt-proxy start
-sed -i 's/START=18/START=99/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/START=18/START=99/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
 
 # DHCP
 mkdir -p package/base-files/files/etc/dnsmasq.d
@@ -59,7 +59,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64
 rm -rf feeds/passwall_packages/tuic
 
 # add init settings
-#wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/99-init-settings -O package/base-files/files/etc/uci-defaults/99-init-settings
+wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/99-init-settings -O package/base-files/files/etc/uci-defaults/99-init-settings
 wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/30-sysinfo.sh -O feeds/packages/utils/bash/files/etc/profile.d/30-sysinfo.sh
 
 # Change to my banner
