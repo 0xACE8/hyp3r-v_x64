@@ -34,7 +34,7 @@ wget --no-check-certificate -O feeds/ace8/luci-theme-argon/htdocs/luci-static/ar
 # sed -i 's/483d8b/1c78ff/g' feeds/ace8/luci-theme-argon/htdocs/luci-static/argon/css/dark.css
 
 # ttyd fix bug
-sed -i '65s/^#//g' feeds/packages/utils/ttyd/files/ttyd.init
+sed -i '/interface}/d' feeds/packages/utils/ttyd/files/ttyd.init
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 sed -i 's/"终端"/"TTYD 终端"/g' feeds/luci/applications/luci-app-ttyd/po/zh_Hans/ttyd.po
 
@@ -56,7 +56,6 @@ echo 'net.core.netdev_max_backlog=2048' >>package/base-files/files/etc/sysctl.d/
 # upgrade 99-default-settings-chinese.sh
 rm -rf package/emortal/default-settings/files/99-default-settings-chinese.sh
 wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/99-default-settings-chinese.sh -O package/emortal/default-settings/files/99-default-settings-chinese.sh
-rm -rf feeds/passwall_packages/tuic
 
 # add init settings
 wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/99-init-settings -O package/base-files/files/etc/uci-defaults/99-init-settings
