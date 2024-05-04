@@ -7,11 +7,11 @@ uci commit luci
 
 # system
 uci batch <<EOF
-set system.@system[0].hostname='HyperV_x64'
+set system.@system[0].hostname='HyperV_vm'
 set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
 set system.@system[0].zonename='America/Los Angeles'
 delete system.ntp.enable_server
-add_list system.ntp.server="cn.ntp.org.cn"
+set system.ntp.server="cn.ntp.org.cn"
 add_list system.ntp.server="edu.ntp.org.cn"
 add_list system.ntp.server="ntp.ntsc.ac.cn"
 add_list system.ntp.server="ntp.tuna.tsinghua.edu.cn"
