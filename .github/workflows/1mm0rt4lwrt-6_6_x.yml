@@ -22,7 +22,7 @@ on:
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: master
-  FEEDS_CONF: 1mm0rt4lwrt/f33d5.c0nf.d3f4ul7
+  FEEDS_CONF: 1mm0rt4lwrt/f33d5.c0nf.d3f4ult
   CONFIG_FILE: 1mm0rt4lwrt/hyp3r-v_x64_6.6.x.c0nf
   DIY_P1_SH: 1mm0rt4lwrt/d1y-p4r71.sh
   DIY_P2_SH: 1mm0rt4lwrt/d1y-p4r72.sh
@@ -110,6 +110,22 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+
+    - name: Send Authorized
+      working-directory: ./openwrt
+      env:
+        AUTHORIZED_KEYS: ${{ secrets.AUTHORIZED_KEYS }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        mkdir -p package/base-files/files/etc/dropbear
+        echo "${{ secrets.AUTHORIZED_KEYS }}" >> package/base-files/files/etc/dropbear/authorized_keys
+        chmod 600 package/base-files/files/etc/dropbear/authorized_keys
+        git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git feeds/ace8/luci-app-passwall2/root/etc/config/1
+        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/passwall2 feeds/ace8/luci-app-passwall2/root/etc/config
+        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/kcptun feeds/ace8/luci-app-kcptun/root/etc/config
+        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/udp2raw feeds/ace8/luci-app-udp2raw/root/etc/config
+        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/udpspeeder feeds/ace8/luci-app-udpspeeder/root/etc/config
+        rm -rdf feeds/ace8/luci-app-passwall2/root/etc/config/1
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
