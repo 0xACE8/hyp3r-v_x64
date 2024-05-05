@@ -120,19 +120,19 @@ jobs:
         mkdir -p package/base-files/files/etc/dropbear
         echo "${{ secrets.AUTHORIZED_KEYS }}" >> package/base-files/files/etc/dropbear/authorized_keys
         chmod 600 package/base-files/files/etc/dropbear/authorized_keys
-        git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git feeds/ace8/luci-app-passwall2/root/etc/config/1
-        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/passwall2 feeds/ace8/luci-app-passwall2/root/etc/config
-        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/kcptun feeds/ace8/luci-app-kcptun/root/etc/config
-        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/udp2raw feeds/ace8/luci-app-udp2raw/root/etc/config
-        mv feeds/ace8/luci-app-passwall2/root/etc/config/1/us/udpspeeder feeds/ace8/luci-app-udpspeeder/root/etc/config
-        rm -rdf feeds/ace8/luci-app-passwall2/root/etc/config/1
+        git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git feeds/ace8
+        mv feeds/ace8/us/passwall2 feeds/ace8/luci-app-passwall2/root/etc/config
+        mv feeds/ace8/us/kcptun feeds/ace8/luci-app-kcptun/root/etc/config
+        mv feeds/ace8/us/udp2raw feeds/ace8/luci-app-udp2raw/root/etc/config
+        mv feeds/ace8/us/udpspeeder feeds/ace8/luci-app-udpspeeder/root/etc/config
+        rm -rdf feeds/ace8/us
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
       env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_TO }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
 
     - name: Download package
       id: package
@@ -180,3 +180,15 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
+
+    - name: Telegram notification
+      uses: appleboy/telegram-action@master
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          资源仓库: ${{ github.repository }}
+          固件包名：OneCloud${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+          固件编译成功！
+          format: markdown
