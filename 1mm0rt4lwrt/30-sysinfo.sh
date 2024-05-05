@@ -43,7 +43,7 @@ function get_ip_addresses()
 		local intf=$(basename $f)
 		# match only interface names starting with e (Ethernet), br (bridge), w (wireless), r (some Ralink drivers use ra<number> format)
 		if [[ $intf =~ $SHOW_IP_PATTERN ]]; then
-			local tmp=$(ip -4 addr show dev $intf | awk '/inet/ {print $2}' | cut -d'/' -f1)
+			local tmp=$(ip addr show dev $intf | awk '/inet/ {print $2}' | cut -d'/' -f1)
 			# add both name and IP - can be informative but becomes ugly with long persistent/predictable device names
 			#[[ -n $tmp ]] && ips+=("$intf: $tmp")
 			# add IP only
