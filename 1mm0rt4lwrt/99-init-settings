@@ -4,6 +4,9 @@
 uci set luci.main.lang=zh_cn
 uci commit luci
 
+#
+/etc/init.d/dnscrypt-proxy stop
+
 
 # system
 uci batch <<EOF
@@ -72,8 +75,10 @@ uci commit firewall
 
 # DHCP & dnsmasq
 uci batch <<EOF
-delete dhcp.@dnsmasq[0].boguspriv
-delete dhcp.@dnsmasq[0].dns_redirec
+set dhcp.@dnsmasq[0].boguspriv='1'
+set dhcp.@dnsmasq[0].dns_redirect='0'
+set dhcp.@dnsmasq[0].expandhosts='0'
+set dhcp.@dnsmasq[0].authoritative='0'
 set dhcp.@dnsmasq[0].interface='lan'
 set dhcp.@dnsmasq[0].dnsseccheckunsigned='0'
 set dhcp.@dnsmasq[0].filter_aaaa='1'
@@ -89,31 +94,6 @@ set dhcp.@dnsmasq[0].server='127.0.0.1#5335'
 EOF
 uci commit dhcp
 /etc/init.d/dnsmasq restart
-
-# dhcp.@dnsmasq[0].boguspriv      # 唯一授权
-# dhcp.@dnsmasq[0].dns_redirect   # DNS 重定向
-# dhcp.@dnsmasq[0].filterwin2k
-# dhcp.@dnsmasq[0].authoritative
-# dhcp.@dnsmasq[0].readethers
-# dhcp.@dnsmasq[0].resolvfile
-# dhcp.@dnsmasq[0].nonwildcard
-# dhcp.@dnsmasq[0].filter_a
-# dhcp.@dnsmasq[0].nonegcache='1'
-# dhcp.@dnsmasq[0].cachesize='10000'
-# dhcp.@dnsmasq[0].filter_aaaa='1'
-# dhcp.@dnsmasq[0].server='1.1.1.1#443'
-# dhcp.@dnsmasq[0].noresolv='1'
-# dhcp.@dnsmasq[0].nohosts='1'
-# dhcp.@dnsmasq[0].interface='lan'   # 监听接口
-# dhcp.@dnsmasq[0].dnsseccheckunsigned='0'   # DNSSEC 检查未签名
-# dhcp.@dnsmasq[0].filter_aaaa='1'  # 过滤 IPv6 AAAA 记录
-# dhcp.@dnsmasq[0].nonegcache='1'   # 禁用无效信息缓存
-# set dhcp.@dnsmasq[0].serversfile='/etc/dnsmasq.d/accelerated-domains.china.conf'
-
-
-# dropbear
-uci commit dropbear
-/etc/init.d/dropbear restart
 
 
 #mosdns
@@ -186,23 +166,14 @@ uci commit argon
 # uci commit netspeedtest
 
 
-# dnscrypt-proxy2 setting
-sed -i 's/START=18/START=99/g' /etc/init.d/dnscrypt-proxy
-sed -i 's/timeout:-5/timeout:-120/g' dnscrypt-proxy
-sed -i 's/ipv6_servers = false/ipv6_servers = true/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/odoh_servers = false/odoh_servers = true/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/http3 = false/http3 = true/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/cache_size = 4096/cache_size = 10240/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/127.0.0.1:9050/127.0.0.1:1070/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/# proxy/proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-#sed -i 's/127.0.0.53:53/127.0.0.1:5335/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-#sed -i 's/127.0.0.1:8888/127.0.0.1:1101/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-#sed -i 's/# http_proxy/http_proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-#sed -i 's/# blocked_names_file/blocked_names_file/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-/etc/init.d/dnscrypt-proxy restart
+# dropbear
+uci commit dropbear
+/etc/init.d/dropbear restart
 
-# crontabs
-#echo '* 4 * * 1  wget --no-check-certificate -O /etc/dnsmasq.d/accelerated-domains.china.conf "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf"' >> /etc/crontabs/root
+
+#
+/etc/init.d/dnscrypt-proxy start
+
 
 exit 0
-reboot
+
