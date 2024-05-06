@@ -31,4 +31,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            他大爷的又编译失败了！
+            ✅ Firmware Compilation <font color=Green>SUCCESSFULLY</font> !!!
+            ⛔ Firmware Compilation <font color=Red>FAILURE</font> !!!
+            Repository:     ${{ github.repository }}
+            Compile time:   ${{ env.time }}
+            Firmware Name:  ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
