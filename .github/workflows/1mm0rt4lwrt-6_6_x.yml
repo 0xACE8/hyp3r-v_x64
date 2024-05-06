@@ -161,9 +161,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ⛔Firmware Compilation FAILURE⛔
-            Repository:    ${{ github.repository }}
-            Compiled time: ${{ env.time }}
+            ⛔ 固件编译失败! ⛔
+            资源仓库: ${{ github.repository }}
+            编译耗时: ${{ env.time }}
 
     - name: Check space usage
       if: (!cancelled())
@@ -199,7 +199,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-            ✅Firmware Compilation SUCCESSFULLY✅
-            Repository:     ${{ github.repository }}
-            Compile time:   ${{ env.time }}
-            Firmware Name:  ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+            ✅ 固件顺利编译完成! ✅
+            资源仓库: ${{ github.repository }}
+            编译耗时: ${{ env.time }}
+            固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
