@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
+        if: steps.organize.outputs.status == 'success' && !cancelled()
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -18,7 +19,7 @@ jobs:
             Repository: ${{ github.repository }}
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-
+            编译耗时：${{ env.time }}
             资源仓库: ${{ github.repository }}
             固件包名：ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
             固件编译成功！
