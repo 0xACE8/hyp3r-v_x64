@@ -23,3 +23,12 @@ jobs:
             资源仓库: ${{ github.repository }}
             固件包名：ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
             固件编译成功！
+
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        if: steps.organize.outputs.status != 'success' && !cancelled()
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            他大爷的又编译失败了！
