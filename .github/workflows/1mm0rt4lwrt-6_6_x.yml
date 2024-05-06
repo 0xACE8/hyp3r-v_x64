@@ -43,7 +43,7 @@ jobs:
       with:
         # this might remove tools that are actually needed,
         # if set to "true" but frees about 6 GB
-        tool-cache: true
+        tool-cache: false
 
         # all of these default to true, but feel free to set to
         # "false" if necessary for your workflow
@@ -183,6 +183,7 @@ jobs:
 
     - name: Telegram notification
       uses: appleboy/telegram-action@master
+      if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -190,4 +191,4 @@ jobs:
           资源仓库: ${{ github.repository }}
           固件包名：ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
           固件编译成功！
-          format: markdown
+
