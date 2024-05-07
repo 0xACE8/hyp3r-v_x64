@@ -112,6 +112,7 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        sed -i 's/root:::0:99999:7:::/root:${{ secrets.OP_SSH_PW }}:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
     - name: Send Authorized
       working-directory: ./openwrt
