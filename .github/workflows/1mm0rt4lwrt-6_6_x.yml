@@ -192,16 +192,15 @@ jobs:
         name: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-#    - name: Telegram notification
-#      uses: appleboy/telegram-action@master
+    - name: Telegram notification
+      uses: appleboy/telegram-action@master
 #      if: steps.compile.outputs.status == 'success' && !cancelled()
-#      with:
-#        to: ${{ secrets.TELEGRAM_TO }}
-#        token: ${{ secrets.TELEGRAM_TOKEN }}
-#        message: |
-#          ✅ 固件顺利编译完成! ✅
-#          资源仓库: ${{ github.repository }}
-#          编译耗时: ${{ env.time }}
-#          固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          ✅ 固件顺利编译完成! ✅
+          资源仓库: ${{ github.repository }}
+          固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
 
 
