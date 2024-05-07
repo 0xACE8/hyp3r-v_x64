@@ -8,7 +8,7 @@
 sed -i 's/192.168.1.1/192.168.177.77/g' package/base-files/files/bin/config_generate
 
 # Set password to PASSWORD
-sed -i 's/root:::0:99999:7:::/root:$1$4xKZB45Q$w0CPT5M6vBWbYNmSWuxfU.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
+sed -i 's/root:::0:99999:7:::/root:${{ secrets.OP_SSH_PW }}:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
 # Change language=auto to zh_cn
 sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-default-settings
