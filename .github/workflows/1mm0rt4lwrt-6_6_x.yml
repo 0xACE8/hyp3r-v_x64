@@ -104,6 +104,8 @@ jobs:
         ./scripts/feeds install -a
 
     - name: Load custom configuration
+      env:
+        OP_SSH_PW: ${{ secrets.OP_SSH_PW }}
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -191,7 +193,6 @@ jobs:
 
     - name: Telegram notification
       uses: appleboy/telegram-action@master
-      if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -200,3 +201,5 @@ jobs:
           资源仓库: ${{ github.repository }}
           编译耗时: ${{ env.time }}
           固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+
+
