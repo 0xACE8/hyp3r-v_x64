@@ -104,22 +104,21 @@ jobs:
         ./scripts/feeds install -a
 
     - name: Load custom configuration
-      env:
-        OP_SSH_PW: ${{ secrets.OP_SSH_PW }}
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        sed -i 's/root:::0:99999:7:::/root:${{ secrets.OP_SSH_PW }}:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
     - name: Send Authorized
       working-directory: ./openwrt
       env:
         AUTHORIZED_KEYS: ${{ secrets.AUTHORIZED_KEYS }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        OP_SSH_PW: ${{ secrets.OP_SSH_PW }}
       run: |
+        sed -i 's/root:::0:99999:7:::/root:${{ secrets.OP_SSH_PW }}:0:0:99999:7:::/g' package/base-files/files/etc/shadow
         mkdir -p package/base-files/files/etc/dropbear
         echo "${{ secrets.AUTHORIZED_KEYS }}" >> package/base-files/files/etc/dropbear/authorized_keys
         chmod 600 package/base-files/files/etc/dropbear/authorized_keys
@@ -193,14 +192,9 @@ jobs:
         path: ${{ env.FIRMWARE }}
 
     - name: Telegram notification
-      uses: appleboy/telegram-action@master
-#      if: steps.compile.outputs.status == 'success' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          ✅ 固件顺利编译完成! ✅
-          资源仓库: ${{ github.repository }}
-          固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-
-
+        run: |
+          https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&text="✅ 固件顺利编译完成! ✅\n资源仓库: ${{ github.repository }} \n固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }} \n
