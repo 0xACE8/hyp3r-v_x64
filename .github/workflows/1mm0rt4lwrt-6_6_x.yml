@@ -197,4 +197,5 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
-          https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&text="✅ 固件顺利编译完成! ✅\n资源仓库: ${{ github.repository }} \n固件名称: ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }} \n
+          https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&text=✅%20固件顺利编译完成! ✅%0A资源仓库:%20${{ github.repository }}%0A固件名称:%20ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+
