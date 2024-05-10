@@ -110,12 +110,14 @@ echo "" # fixed newline
 
 display "内存已用" "$memory_usage" "70" "0" " %" " of ${memory_total}MB"
 display "交换内存" "$swap_usage" "10" "0" " %" " of $swap_total""Mb"
-printf "IP  地址:  \x1B[92m%s\x1B[0m" "$ip_address"
-echo "" # fixed newline
-
 display "系统存储" "$root_usage" "90" "1" "%" " of $root_total"
+echo "" # fixed newline
 if [ -x /sbin/cpuinfo ]; then
 printf "CPU 信息: \x1B[92m%s\x1B[0m\t" "$(echo `/sbin/cpuinfo | cut -d ' ' -f -4`)"
 fi
+echo "" # fixed newline
+printf "IP  地址:  \x1B[92m%s\x1B[0m"
+echo ""
+printf "\x1B[92m%s\x1B[0m" "$ip_address"
 echo ""
 echo ""
