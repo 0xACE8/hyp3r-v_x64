@@ -154,15 +154,12 @@ jobs:
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
     - name: send telegram message on push
-      uses: appleboy/telegram-action@master
       if: steps.compile.outputs.status != 'success' && !cancelled()
-      with:
+      env:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          ⛔ 固件编译失败! ⛔
-          资源仓库: ${{ github.repository }}
-          编译耗时: ${{ env.time }}
+      run: |
+        curl -i -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&text=⛔ 固件编译失败! ⛔%0A资源仓库:%20${{ github.repository }}"
 
     - name: Check space usage
       if: (!cancelled())
