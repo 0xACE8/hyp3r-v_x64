@@ -159,7 +159,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
       run: |
-        curl -i -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&format=markdown&text=⛔%20固件编译失败!%20⛔%0A资源仓库:%20${{ github.repository }}"
+        curl -i -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&format=markdown&text=⛔%20固件编译失败!%20⛔%0A目标用户:%200xACE8%0A资源仓库:%20${{ github.repository }}"
 
     - name: Check space usage
       if: (!cancelled())
@@ -194,5 +194,4 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
       run: |
-        curl -i -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&format=markdown&text=✅%20固件顺利编译完成!%20✅%0A资源仓库:%20${{ github.repository }}%0A固件名称:%20ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}"
-
+        curl -i -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_TO }}&format=markdown&text=✅%20固件顺利编译完成!%20✅%0A目标用户:%200xACE8%0A资源仓库:%20${{ github.repository }}%0A固件名称:%20ImmortalWrt_HyperV${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}"
