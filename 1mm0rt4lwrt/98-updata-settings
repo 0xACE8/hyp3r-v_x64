@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+sysupgrade -r package/base-files/files/etc/backup/us_lanx3-0511.tar.gz &
+
+exit 0
