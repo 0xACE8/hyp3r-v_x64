@@ -107,6 +107,17 @@ jobs:
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        sed -i '/VHDX_IMAGES/VMDK_IMAGES/g' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_luci-app-ddns-go=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_luci-app-tailscale=y/d' openwrt/.config
+        sed -i '/ddns-go-zh-cn=y/d' openwrt/.config
+        sed -i '/tailscale-zh-cn=y/d' openwrt/.config
+        sed -i '/tailscale=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_ddns-go=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_ddns-scripts-cloudflare=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_ddns-scripts-services=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_ddns-scripts=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_dnscrypt-proxy2=y/d' openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
@@ -114,9 +125,7 @@ jobs:
     - name: Send Authorized
       working-directory: ./openwrt
       env:
-        AUTHORIZED_KEYS: ${{ secrets.AUTHORIZED_KEYS }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        OP_SSH_PW: ${{ secrets.OP_SSH_PW }}
       run: |
         sed -i 's/192.168.1.1/192.168.50.72/g' package/base-files/files/bin/config_generate
         git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git
@@ -175,6 +184,13 @@ jobs:
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
+        rm -rf *.buildinfo
+        rm -rf profiles.json
+        rm -rf *.manifest
+        rm -rf *.sha
+        rm -rf sha256sums
+        rm -rf *.bin
+        rm -rf *.img.gz
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
