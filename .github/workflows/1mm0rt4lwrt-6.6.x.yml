@@ -8,7 +8,7 @@
 # Description: Build using GitHub Actions
 #
 
-name: Build 1mm0rt4lwrt 6.6.x kernel Atcions
+name: Build 1mm0rt4lwrt 6.6.x kernel new Atcions
 
 on:
   repository_dispatch:
