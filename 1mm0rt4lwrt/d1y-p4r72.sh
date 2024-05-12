@@ -7,9 +7,6 @@
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.177.77/g' package/base-files/files/bin/config_generate
 
-# Set password to PASSWORD
-#sed -i 's/root:::0:99999:7:::/root:${{ secrets.OP_SSH_PW }}:0:0:99999:7:::/g' package/base-files/files/etc/shadow
-
 # Change language=auto to zh_cn
 sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-default-settings
 
@@ -24,9 +21,8 @@ sed -i 's/ash/bash/g' package/base-files/files/etc/passwd
 
 # luci theme argon update
 sed -i 's/"Argon 主题设置"/"主题设置"/g' feeds/ace8/luci-app-argon-config/po/zh_Hans/argon-config.po
-
 rm -rf feeds/ace8/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-wget --no-check-certificate -O feeds/ace8/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg "https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64_u3f1/main/bg1.jpg"
+wget --no-check-certificate -O feeds/ace8/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg "https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/bg1.jpg"
 
 # sed -i 's/5e72e4/1c78ff/g' feeds/ace8/luci-theme-argon/htdocs/luci-static/argon/css/cascade.css
 # sed -i 's/5e72e4/1c78ff/g' feeds/ace8/luci-theme-argon/htdocs/luci-static/argon/css/dark.css
