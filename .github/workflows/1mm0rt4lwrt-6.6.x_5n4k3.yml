@@ -107,7 +107,7 @@ jobs:
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        sed -i '/VHDX_IMAGES/VMDK_IMAGES/g' openwrt/.config
+        sed -i 's/VHDX_IMAGES/VMDK_IMAGES/g' openwrt/.config
         sed -i '/CONFIG_PACKAGE_luci-app-ddns-go=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_luci-app-tailscale=y/d' openwrt/.config
         sed -i '/ddns-go-zh-cn=y/d' openwrt/.config
