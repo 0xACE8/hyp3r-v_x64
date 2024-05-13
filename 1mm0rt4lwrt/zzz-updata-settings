@@ -12,11 +12,11 @@ rm -rdf /etc/backup
 
 uci commit system
 uci commit network
-#/etc/init.d/network restart
+/etc/init.d/network restart
 uci commit firewall
-#/etc/init.d/firewall restart
+/etc/init.d/firewall restart
 uci commit dhcp
-#/etc/init.d/dnsmasq restart
+/etc/init.d/dnsmasq restart
 uci commit mosdns
 uci commit argon
 
