@@ -1,6 +1,0 @@
-#!/bin/sh
-
-sysupgrade -r /etc/backup/us_lanx3-0511.tar.gz
-rm -rdf /etc/backup
-
-exit 0
