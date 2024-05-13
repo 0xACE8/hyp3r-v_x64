@@ -1,5 +1,6 @@
 #!/bin/bash
 
+/etc/init.d/dropbear stop
 /etc/init.d/dnscrypt-proxy stop
 /etc/init.d/passwall2 stop
 /etc/init.d/udp2raw stop
@@ -27,5 +28,6 @@ uci commit argon
 /etc/init.d/mosdns start
 sleep 20
 /etc/init.d/dnscrypt-proxy start
+/etc/init.d/dropbear start
 
 exit 0
