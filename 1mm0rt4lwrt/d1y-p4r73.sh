@@ -37,7 +37,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64
 
 # add init settings
 #wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/98-updata-settings -O package/base-files/files/etc/uci-defaults/98-updata-settings
-wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/zzz-reboot -O package/base-files/files/etc/uci-defaults/zzz-updata-settings
+wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/zzz-updata-settings -O package/base-files/files/etc/uci-defaults/zzz-updata-settings
 wget --no-check-certificate https://raw.githubusercontent.com/0xACE8/hyp3r-v_x64/main/1mm0rt4lwrt/30-sysinfo.sh -O feeds/packages/utils/bash/files/etc/profile.d/30-sysinfo.sh
 
 # Change to my banner
