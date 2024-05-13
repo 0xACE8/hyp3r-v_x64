@@ -1,6 +1,15 @@
 #!/bin/bash
 
 /etc/init.d/dnscrypt-proxy stop
+/etc/init.d/passwall2 stop
+/etc/init.d/udp2raw stop
+/etc/init.d/udpspeeder stop
+/etc/init.d/kcptun stop
+/etc/init.d/mosdns stop
+
+sysupgrade -r /etc/backup/us_lanx3-0511.tar.gz
+rm -rdf /etc/backup
+
 uci commit system
 uci commit network
 #/etc/init.d/network restart
@@ -9,9 +18,14 @@ uci commit firewall
 uci commit dhcp
 #/etc/init.d/dnsmasq restart
 uci commit mosdns
-#/etc/init.d/mosdns restart
 uci commit argon
-uci commit dropbear
+
+/etc/init.d/passwall2 start
+/etc/init.d/udp2raw start
+/etc/init.d/udpspeeder start
+/etc/init.d/kcptun start
+/etc/init.d/mosdns start
+sleep 20
 /etc/init.d/dnscrypt-proxy start
 
 exit 0
