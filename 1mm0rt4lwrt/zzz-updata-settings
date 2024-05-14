@@ -8,7 +8,7 @@
 /etc/init.d/kcptun stop
 /etc/init.d/mosdns stop
 
-sysupgrade -r /etc/backup/us_lanx3-0511.tar.gz
+sysupgrade -r /etc/backup/HyperVx64_us_lanx3-0511.tar.gz
 rm -rf /etc/backup
 
 uci commit system
