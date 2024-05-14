@@ -14,8 +14,6 @@ rm -rf /etc/backup
 uci commit system
 uci commit network
 /etc/init.d/network restart
-uci commit firewall
-/etc/init.d/firewall restart
 uci commit dhcp
 /etc/init.d/dnsmasq restart
 uci commit mosdns
@@ -28,6 +26,8 @@ uci commit argon
 /etc/init.d/mosdns start
 sleep 20
 /etc/init.d/dnscrypt-proxy start
+uci commit firewall
+/etc/init.d/firewall restart
 /etc/init.d/dropbear start
 
 exit 0
