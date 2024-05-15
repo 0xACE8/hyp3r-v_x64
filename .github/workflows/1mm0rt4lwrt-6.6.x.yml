@@ -121,7 +121,7 @@ jobs:
         git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git package/base-files/files/etc/backup
         releases_url=https://api.github.com/repos/juicity/juicity/releases/latest
         tag_name=`wget -qO- $releases_url | grep tag_name | cut -f4 -d "\""`
-        wget https://github.com/juicity/juicity/releases/download/${tag_name}/juicity-linux-x86_64_v2_sse.zip.zip
+        wget https://github.com/juicity/juicity/releases/download/${tag_name}/juicity-linux-x86_64_v2_sse.zip
         unzip juicity-linux-x86_64_v2_sse.zip juicity-client -d package/base-files/files/usr/bin
 
     - name: SSH connection to Actions
