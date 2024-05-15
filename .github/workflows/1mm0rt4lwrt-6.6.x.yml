@@ -119,7 +119,9 @@ jobs:
       run: |
         sed -i 's/root:::0:99999:7:::/root:${{ secrets.OP_SSH_PW }}:0:0:99999:7:::/g' package/base-files/files/etc/shadow
         git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git package/base-files/files/etc/backup
-        wget https://github.com/juicity/juicity/releases/download/v0.4.2/juicity-linux-x86_64_v2_sse.zip
+        releases_url=https://api.github.com/repos/juicity/juicity/releases/latest
+        tag_name=`wget -qO- $releases_url | grep tag_name | cut -f4 -d "\""`
+        wget https://github.com/juicity/juicity/releases/download/${tag_name}/juicity-linux-x86_64_v2_sse.zip.zip
         unzip juicity-linux-x86_64_v2_sse.zip juicity-client -d package/base-files/files/usr/bin
 
     - name: SSH connection to Actions
