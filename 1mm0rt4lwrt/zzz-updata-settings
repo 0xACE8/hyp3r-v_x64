@@ -27,7 +27,7 @@ uci commit argon
 /etc/init.d/udpspeeder start
 /etc/init.d/kcptun start
 /etc/init.d/mosdns start
-/etc/init.d/tailscale restart
+/etc/init.d/tailscale start
 sleep 20
 /etc/init.d/dnscrypt-proxy start
 uci commit firewall
