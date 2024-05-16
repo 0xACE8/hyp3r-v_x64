@@ -3,10 +3,12 @@
 /etc/init.d/dropbear stop
 /etc/init.d/dnscrypt-proxy stop
 /etc/init.d/passwall2 stop
+/etc/init.d/haproxy stop
 /etc/init.d/udp2raw stop
 /etc/init.d/udpspeeder stop
 /etc/init.d/kcptun stop
 /etc/init.d/mosdns stop
+/etc/init.d/tailscale stop
 
 sysupgrade -r /etc/backup/HyperVx64_us_lanx3-0511.tar.gz
 rm -rf /etc/backup
@@ -20,10 +22,12 @@ uci commit mosdns
 uci commit argon
 
 /etc/init.d/passwall2 start
+/etc/init.d/haproxy start
 /etc/init.d/udp2raw start
 /etc/init.d/udpspeeder start
 /etc/init.d/kcptun start
 /etc/init.d/mosdns start
+/etc/init.d/tailscale restart
 sleep 20
 /etc/init.d/dnscrypt-proxy start
 uci commit firewall
