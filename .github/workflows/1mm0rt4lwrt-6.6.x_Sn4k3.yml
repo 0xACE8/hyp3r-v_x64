@@ -109,11 +109,11 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         sed -i 's/VHDX_IMAGES/VMDK_IMAGES/g' openwrt/.config
         sed -i '/CONFIG_PACKAGE_luci-app-ddns-go=y/d' openwrt/.config
-        sed -i '/CONFIG_PACKAGE_luci-app-tailscale=y/d' openwrt/.config
+#        sed -i '/CONFIG_PACKAGE_luci-app-tailscale=y/d' openwrt/.config
         sed -i '/ddns-go-zh-cn=y/d' openwrt/.config
-        sed -i '/tailscale-zh-cn=y/d' openwrt/.config
-        sed -i '/tailscale=y/d' openwrt/.config
-        sed -i '/tailscaled=y/d' openwrt/.config
+#        sed -i '/tailscale-zh-cn=y/d' openwrt/.config
+#        sed -i '/tailscale=y/d' openwrt/.config
+#        sed -i '/tailscaled=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-go=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-scripts-cloudflare=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-scripts-services=y/d' openwrt/.config
@@ -129,10 +129,10 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/0xACE8/openwrt-data.git package/base-files/files/etc/backup
-        releases_url=https://api.github.com/repos/juicity/juicity/releases/latest
-        tag_name=`wget -qO- $releases_url | grep tag_name | cut -f4 -d "\""`
-        wget https://github.com/juicity/juicity/releases/download/${tag_name}/juicity-linux-armv7.zip
-        unzip juicity-linux-armv7.zip juicity-client -d package/base-files/files/usr/bin
+#        releases_url=https://api.github.com/repos/juicity/juicity/releases/latest
+#        tag_name=`wget -qO- $releases_url | grep tag_name | cut -f4 -d "\""`
+#        wget https://github.com/juicity/juicity/releases/download/${tag_name}/juicity-linux-armv7.zip
+#        unzip juicity-linux-armv7.zip juicity-client -d package/base-files/files/usr/bin
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
