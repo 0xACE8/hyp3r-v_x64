@@ -109,11 +109,7 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         sed -i 's/VHDX_IMAGES/VMDK_IMAGES/g' openwrt/.config
         sed -i '/CONFIG_PACKAGE_luci-app-ddns-go=y/d' openwrt/.config
-#        sed -i '/CONFIG_PACKAGE_luci-app-tailscale=y/d' openwrt/.config
         sed -i '/ddns-go-zh-cn=y/d' openwrt/.config
-#        sed -i '/tailscale-zh-cn=y/d' openwrt/.config
-#        sed -i '/tailscale=y/d' openwrt/.config
-#        sed -i '/tailscaled=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-go=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-scripts-cloudflare=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-scripts-services=y/d' openwrt/.config
@@ -122,6 +118,10 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+#        sed -i '/CONFIG_PACKAGE_luci-app-tailscale=y/d' openwrt/.config        
+#        sed -i '/tailscale-zh-cn=y/d' openwrt/.config
+#        sed -i '/tailscale=y/d' openwrt/.config
+#        sed -i '/tailscaled=y/d' openwrt/.config
 
     - name: Send Authorized
       working-directory: ./openwrt
