@@ -8,7 +8,7 @@
 # Description: Build using GitHub Actions
 #
 
-name: Build 1mm0rt4lwrt 6.6.x kernel Atcions
+name: Build 1mm0rt4lwrt kernel Atcions
 
 on:
   repository_dispatch:
@@ -23,7 +23,7 @@ env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: master
   FEEDS_CONF: 1mm0rt4lwrt/f33d5.c0nf.d3f4ult
-  CONFIG_FILE: 1mm0rt4lwrt/hyp3r-v_x64_6.6.x.c0nf
+  CONFIG_FILE: 1mm0rt4lwrt/hyp3r-v_x64.c0nf
   DIY_P1_SH: 1mm0rt4lwrt/d1y-p4r71.sh
   DIY_P2_SH: 1mm0rt4lwrt/d1y-p4r72.sh
   UPLOAD_BIN_DIR: false
