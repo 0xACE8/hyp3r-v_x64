@@ -8,7 +8,7 @@
 # Description: Build using GitHub Actions
 #
 
-name: Build 1mm0rt4lwrt kernel Atcions
+name: Build 1mm0rt4lwrt Atcions
 
 on:
   repository_dispatch:
@@ -173,6 +173,8 @@ jobs:
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      env: 
+        PWD: ${{ secrets.FIRMWARE }}
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
