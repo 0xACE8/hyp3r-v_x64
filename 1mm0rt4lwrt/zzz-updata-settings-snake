@@ -2,7 +2,6 @@
 
 /etc/init.d/dropbear stop
 /etc/init.d/passwall2 stop
-/etc/init.d/haproxy stop
 /etc/init.d/udp2raw stop
 /etc/init.d/udpspeeder stop
 /etc/init.d/kcptun stop
@@ -20,7 +19,6 @@ uci commit mosdns
 uci commit argon
 
 /etc/init.d/passwall2 start
-/etc/init.d/haproxy start
 /etc/init.d/udp2raw start
 /etc/init.d/udpspeeder start
 /etc/init.d/kcptun start
