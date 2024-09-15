@@ -8,7 +8,7 @@
 # Description: Build using GitHub Actions
 #
 
-name: Build 1mm0rt4lwrt Sn4k3 Atcions
+name: Build 1mm0rt4lwrt Sneak Atcions
 
 on:
   repository_dispatch:
@@ -107,6 +107,7 @@ jobs:
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        sed -i 's/=256/=8192/g' openwrt/.config
         sed -i 's/VHDX_IMAGES/VMDK_IMAGES/g' openwrt/.config
         sed -i '/CONFIG_PACKAGE_luci-app-ddns-go=y/d' openwrt/.config
         sed -i '/ddns-go-zh-cn=y/d' openwrt/.config
