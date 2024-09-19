@@ -214,6 +214,7 @@ CONFIG_ZRAM_DEF_COMP_LZORLE=y
 
 # tier
 CONFIG_PACKAGE_luci-app-easytier=y
+CONFIG_PACKAGE_luci-lib-fs=y
 
 CONFIG_PACKAGE_ip-tiny=y
 CONFIG_PACKAGE_libminiupnpc=y
