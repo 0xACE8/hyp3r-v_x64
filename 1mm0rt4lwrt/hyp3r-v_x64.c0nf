@@ -212,6 +212,9 @@ CONFIG_SQLITE3_RTREE=y
 CONFIG_ZLIB_OPTIMIZE_SPEED=y
 CONFIG_ZRAM_DEF_COMP_LZORLE=y
 
+# tier
+CONFIG_PACKAGE_luci-app-easytier=y
+
 # theme
 CONFIG_PACKAGE_luci-theme-argon=y
 CONFIG_PACKAGE_luci-app-argon-config=y
