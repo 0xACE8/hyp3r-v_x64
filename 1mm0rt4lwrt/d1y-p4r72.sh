@@ -13,6 +13,9 @@ sed -i 's/lang="auto"/lang="zh_cn"/g' package/emortal/default-settings/files/99-
 # Change ash to bash
 sed -i 's/ash/bash/g' package/base-files/files/etc/passwd
 
+# 
+sed -i 's\[ -f /etc/banner ] && cat /etc/banner\[ -f /etc/banner ] && cat /etc/banner | lolcat\g' feeds/package/base-files/files/etc/profile
+
 # Modify Ntp server
 #sed -i 's/ntp.tencent.com/ntp.ntsc.ac.cn/g' package/emortal/default-settings/files/99-default-settings-chinese
 #sed -i 's/ntp1.aliyun.com/cn.ntp.org.cn/g' package/emortal/default-settings/files/99-default-settings-chinese
