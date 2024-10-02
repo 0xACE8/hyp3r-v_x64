@@ -34,19 +34,19 @@ sed -i 's/"终端"/"TTYD 终端"/g' feeds/luci/applications/luci-app-ttyd/po/zh_
 sed -i '4 i\\t\t"order": 91,' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 
 # dnscrypt-proxy2 patch
-sed -i 's/START=18/START=99/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/timeout:-5/timeout:-120/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/ipv6_servers = false/ipv6_servers = true/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/odoh_servers = false/odoh_servers = true/g' /feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/http3 = false/http3 = true/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/cache_size = 4096/cache_size = 8192/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/127.0.0.1:9050/127.0.0.1:1070/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/# proxy/proxy/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
-sed -i 's/# blocked_names_file/blocked_names_file/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/START=18/START=99/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/timeout:-5/timeout:-120/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/ipv6_servers = false/ipv6_servers = true/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/odoh_servers = false/odoh_servers = true/g' /feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/http3 = false/http3 = true/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/cache_size = 4096/cache_size = 8192/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/127.0.0.1:9050/127.0.0.1:1070/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/# proxy/proxy/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
+#sed -i 's/# blocked_names_file/blocked_names_file/g' feeds/packages/net/dnscrypt-proxy2/files/dnscrypt-proxy.init
 #sed -i 's/127.0.0.53:53/127.0.0.1:5335/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/127.0.0.1:8888/127.0.0.1:1071/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/# http_proxy/http_proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
-sed -i 's/'9.9.9.11:53', '8.8.8.8:53'/'8.8.8.8:53', '94.140.14.14:53', '46.250.226.242:53'/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
+#sed -i 's/127.0.0.1:8888/127.0.0.1:1071/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
+#sed -i 's/# http_proxy/http_proxy/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
+#sed -i 's/'9.9.9.11:53', '8.8.8.8:53'/'8.8.8.8:53', '94.140.14.14:53', '46.250.226.242:53'/g' /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
 #wget --no-check-certificate https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md -O feeds/packages/net/dnscrypt-proxy2/files/public-resolvers.md
 #wget --no-check-certificate https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md.minisig -O feeds/packages/net/dnscrypt-proxy2/files/public-resolvers.md.minisig
 #wget --no-check-certificate https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md -O feeds/packages/net/dnscrypt-proxy2/files/relays.md
@@ -55,6 +55,9 @@ sed -i 's/'9.9.9.11:53', '8.8.8.8:53'/'8.8.8.8:53', '94.140.14.14:53', '46.250.2
 # DHCP
 #mkdir -p package/base-files/files/etc/dnsmasq.d
 #wget --no-check-certificate -O package/base-files/files/etc/dnsmasq.d/accelerated-domains.china.conf "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf"
+
+# change navbar 'VPN' to 'NAT'
+sed -i 's/msgstr "VPN"/msgstr "NAT"/g' luci/modules/luci-base/po/zh_Hans/base.po
 
 # Boost UDP
 echo '# optimize udp' >>package/base-files/files/etc/sysctl.d/10-default.conf
