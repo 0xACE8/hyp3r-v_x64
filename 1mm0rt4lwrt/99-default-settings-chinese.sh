@@ -8,7 +8,7 @@ uci -q get system.@imm_init[0] > "/dev/null" || uci -q add system imm_init > "/d
 
 if ! uci -q get system.@imm_init[0].system_chn > "/dev/null"; then
         uci -q batch <<-EOF
-                set system.@system[0].hostname='HyperWrt'
+                set system.@system[0].hostname='HyperVx64'
                 set system.@system[0].timezone="PST8PDT,M3.2.0,M11.1.0"
                 set system.@system[0].zonename="America/Los Angeles"
                 set system.ntp.use_dhcp='0'
