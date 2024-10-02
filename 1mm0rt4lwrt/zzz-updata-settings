@@ -10,6 +10,13 @@
 /etc/init.d/mosdns stop
 /etc/init.d/tailscale stop
 
+# fix distfeeds
+sed -i "/ace8/d" /etc/opkg/distfeeds.conf
+sed -i "/passwall_packages/d" /etc/opkg/distfeeds.conf
+
+rm -f /etc/dnscrypt-proxy2/*.toml
+mv /etc/backup/dnscrypt-proxy.toml /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
+
 sysupgrade -r /etc/backup/HyperVx64_us_lanx3.tar.gz
 rm -rf /etc/backup
 
@@ -20,18 +27,17 @@ uci commit dhcp
 /etc/init.d/dnsmasq restart
 uci commit mosdns
 uci commit argon
-
+uci commit firewall
+/etc/init.d/firewall restart
+/etc/init.d/dropbear start
 /etc/init.d/passwall2 start
 /etc/init.d/haproxy start
 /etc/init.d/udp2raw start
 /etc/init.d/udpspeeder start
 /etc/init.d/kcptun start
-/etc/init.d/mosdns start
-/etc/init.d/tailscale start
-sleep 20
 /etc/init.d/dnscrypt-proxy start
-uci commit firewall
-/etc/init.d/firewall restart
-/etc/init.d/dropbear start
+/etc/init.d/tailscale start
+/etc/init.d/mosdns start
+
 
 exit 0
