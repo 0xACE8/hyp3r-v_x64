@@ -8,7 +8,7 @@
 # Description: Build using GitHub Actions
 #
 
-name: Build 1mm0rt4lwrt Sneak Atcions
+name: Build 1mm0rt4lwrt Snake Atcions
 
 on:
   repository_dispatch:
@@ -116,6 +116,16 @@ jobs:
         sed -i '/CONFIG_PACKAGE_ddns-scripts-services=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_ddns-scripts=y/d' openwrt/.config
         sed -i '/CONFIG_PACKAGE_dnscrypt-proxy2=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_luci-app-easytier=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_luci-lib-fs=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_luci-app-samba4=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_luci-i18n-samba4-zh-cn=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_samba4-libs=y/d' openwrt/.config
+        sed -i '/CONFIG_PACKAGE_samba4-server=y/d' openwrt/.config
+        sed -i '/CONFIG_SAMBA4_SERVER_AVAHI=y/d' openwrt/.config
+        sed -i '/CONFIG_SAMBA4_SERVER_NETBIOS=y/d' openwrt/.config
+        sed -i '/CONFIG_SAMBA4_SERVER_VFS=y/d' openwrt/.config
+        sed -i '/CONFIG_SAMBA4_SERVER_WSDD2=y/d' openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
