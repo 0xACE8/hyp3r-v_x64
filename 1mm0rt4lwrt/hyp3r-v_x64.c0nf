@@ -299,7 +299,7 @@ CONFIG_PACKAGE_libfuse3=y
 CONFIG_PACKAGE_rclone=y
 CONFIG_PACKAGE_rclone-config=y
 CONFIG_PACKAGE_rclone-ng=y
-CONFIG_PACKAGE_rclone-webui-react=y
+# CONFIG_PACKAGE_rclone-webui-react=y
 
 # samba4
 CONFIG_PACKAGE_luci-app-samba4=y
@@ -310,7 +310,6 @@ CONFIG_SAMBA4_SERVER_AVAHI=y
 CONFIG_SAMBA4_SERVER_NETBIOS=y
 CONFIG_SAMBA4_SERVER_VFS=y
 CONFIG_SAMBA4_SERVER_WSDD2=y
-
 
 # tinyfecvpn
 # CONFIG_PACKAGE_luci-app-tinyfecvpn=y
